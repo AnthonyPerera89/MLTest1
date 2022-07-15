@@ -64,6 +64,8 @@ def powerRediction():
     avgWSpeedP = "Empty"
     avgPPeriod = "Empty"
 
+    power_generated = 0.0
+    predict = "Empty"
 
 
     print(request.method)
@@ -127,11 +129,11 @@ def powerRediction():
         new_prediction = predict_model(saved_final_lightgbm,new_data)
         #new_prediction[new_prediction < 0] = 0
         
-        power_generated = new_prediction.iloc[0,15]
-        power_generated = round(power_generated, 2)
+        print(new_prediction.iloc[0,15])
+        predict = new_prediction.iloc[0,15]
+        print("Power Generated   : ",predict)
 
-        print("Power Generated   : ",power_generated)
-    return render_template("index.html",power_generated=power_generated)
+    return render_template("index.html",power_generated=predict)
 
 
 if __name__ == "__main__":
